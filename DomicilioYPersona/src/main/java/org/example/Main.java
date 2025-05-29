@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.entities.Domicilio;
 import org.example.entities.Persona;
+import org.example.services.DomicilioServicio;
 import org.example.services.PersonaService;
 
 import java.util.List;
@@ -29,5 +30,23 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Solo como demostración adicional
+        DomicilioServicio domicilioService = new DomicilioServicio();
+
+        Domicilio nuevoDom = new Domicilio();
+        nuevoDom.setCalle("Calle Falsa 123");
+        nuevoDom.setCiudad("Shelbyville");
+
+        try {
+            domicilioService.guardarDomicilio(nuevoDom);
+            System.out.println("Domicilio guardado: " + nuevoDom);
+
+            List<Domicilio> lista = domicilioService.obtenerTodos();
+            lista.forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

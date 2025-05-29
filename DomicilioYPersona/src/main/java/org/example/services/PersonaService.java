@@ -5,7 +5,7 @@ import org.example.entities.Persona;
 
 import java.util.List;
 
-public class PersonaService {
+public class PersonaService implements GenericService<Persona>{
     private final PersonaDaoImpl personaDAO = new PersonaDaoImpl();
 
     public void guardarPersona(Persona persona) throws Exception {
@@ -14,5 +14,10 @@ public class PersonaService {
 
     public List<Persona> obtenerTodas() throws Exception {
         return personaDAO.listarTodos();
+    }
+
+    @Override
+    public void guardar(Persona entity) throws Exception {
+
     }
 }
