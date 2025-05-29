@@ -1,8 +1,14 @@
 package org.example.entities;
 
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 public class Persona {
     private int id;
     private String nombre;

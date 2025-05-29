@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonaDaoImpl implements GenericDao<Persona> {
+public class PersonaDaoImpl implements PersonaDao {
 
     @Override
     public void insertar(Persona persona) throws Exception {
@@ -41,8 +41,33 @@ public class PersonaDaoImpl implements GenericDao<Persona> {
 
             conn.commit();
         } catch (Exception e) {
-            throw new Exception("Error insertando persona: " + e.getMessage(), e);
+            throw new Exception("Error: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public void guardar(Persona persona) throws SQLException {
+
+    }
+
+    @Override
+    public void actualizar(Persona persona) throws SQLException {
+
+    }
+
+    @Override
+    public void eliminar(long id) throws SQLException {
+
+    }
+
+    @Override
+    public Persona buscarPorId(long id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<Persona> buscarTodos() throws SQLException {
+        return List.of();
     }
 
     @Override
@@ -76,7 +101,7 @@ public class PersonaDaoImpl implements GenericDao<Persona> {
             }
 
         } catch (SQLException e) {
-            throw new Exception("Error listando personas: " + e.getMessage(), e);
+            throw new Exception("Error: " + e.getMessage(), e);
         }
 
         return personas;

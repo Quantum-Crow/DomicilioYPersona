@@ -1,15 +1,53 @@
 package org.example;
 
+import org.example.DAO.DomicilioDaoImpl;
+import org.example.DAO.PersonaDaoImpl;
 import org.example.entities.Domicilio;
 import org.example.entities.Persona;
 import org.example.services.DomicilioServicio;
 import org.example.services.PersonaService;
 
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-        PersonaService service = new PersonaService();
+        try {
+            DomicilioDaoImpl domicilioDAO = new DomicilioDaoImpl();
+            PersonaDaoImpl personaDao = new PersonaDaoImpl();
+
+            DomicilioServicio domicilioService = new DomicilioServicio(domicilioDAO);
+            PersonaService PersonaService = new PersonaService(personaDao);
+
+            Domicilio domicilio = Domicilio.builder()
+                    .calle("Avenida Siempre Viva")
+                    .ciudad("Springfield")
+                    .build();
+
+            domicilioService.guardar(domicilio);
+            System.out.println("Domicilio ID: " + domicilio.getId());
+
+            Persona persona = Persona.builder()
+                    .nombre("Homero")
+                    .apellido("Simpson")
+                    .domicilio(domicilio)
+                    .build();
+
+            PersonaService.guardar(persona);
+            System.out.println("Persona guardada con ID: " + persona.getId());
+
+
+            Persona personaEncontrada = PersonaService.buscarPorId(persona.getId());
+            if (personaEncontrada != null) {
+                System.out.println("Esta es la persona: " + personaEncontrada.getNombre() + " " + personaEncontrada.getApellido());
+            } else {
+                System.out.println("No hay info");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+       /*
+       Creo que nada de esto funciona (Idea de antes de implementar lombok), lo dejamos por si alguien quiere intentar algo con esto
+       PersonaService service = new PersonaService();
 
         Domicilio dom = new Domicilio();
         dom.setCalle("Av. Siempre Viva");
@@ -30,8 +68,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // Solo como demostración adicional
+         //Solo como demostración adicional
         DomicilioServicio domicilioService = new DomicilioServicio();
 
         Domicilio nuevoDom = new Domicilio();
@@ -46,7 +83,6 @@ public class Main {
             lista.forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
-}

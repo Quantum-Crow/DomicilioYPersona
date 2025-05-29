@@ -1,14 +1,14 @@
 package org.example.DAO;
 
-import org.example.DAO.GenericDao;
 import org.example.entities.Domicilio;
 import org.example.config.DatabaseConnectionPool;
+import org.example.entities.Persona;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DomicilioDaoImpl implements GenericDao<Domicilio> {
+public class DomicilioDaoImpl implements DomicilioDao {
 
     @Override
     public void insertar(Domicilio domicilio) throws Exception {
@@ -32,7 +32,7 @@ public class DomicilioDaoImpl implements GenericDao<Domicilio> {
     }
 
     @Override
-    public List<Domicilio> listarTodos() throws Exception {
+    public List<Persona> listarTodos() throws Exception {
         List<Domicilio> domicilios = new ArrayList<>();
 
         String sql = "SELECT id, calle, ciudad FROM domicilio";
@@ -52,7 +52,36 @@ public class DomicilioDaoImpl implements GenericDao<Domicilio> {
         } catch (SQLException e) {
             throw new Exception("Error listando domicilios: " + e.getMessage(), e);
         }
+        return List.of();
+    }
 
-        return domicilios;
+    @Override
+    public void insertar(Persona persona) throws Exception {
+
+    }
+
+    @Override
+    public void guardar(Domicilio domicilio) throws SQLException {
+
+    }
+
+    @Override
+    public void actualizar(Domicilio domicilio) throws SQLException {
+
+    }
+
+    @Override
+    public void eliminar(long id) throws SQLException {
+
+    }
+
+    @Override
+    public Domicilio buscarPorId(long id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<Domicilio> buscarTodos() throws SQLException {
+        return List.of();
     }
 }

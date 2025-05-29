@@ -1,18 +1,47 @@
 package org.example.services;
 
+import org.example.DAO.DomicilioDao;
 import org.example.entities.Domicilio;
-import org.example.DAO.DomicilioDaoImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public class DomicilioServicio {
-    private final DomicilioDaoImpl domicilioDAO = new DomicilioDaoImpl();
+public class DomicilioServicio implements GenericService<Domicilio> {
 
-    public void guardarDomicilio(Domicilio domicilio) throws Exception {
-        domicilioDAO.insertar(domicilio);
+    private final DomicilioDao domicilioDao;
+
+    public DomicilioServicio(DomicilioDao domicilioDao) {
+        this.domicilioDao = domicilioDao;
     }
 
-    public List<Domicilio> obtenerTodos() throws Exception {
-        return domicilioDAO.listarTodos();
+    @Override
+    public void guardar(Domicilio domicilio) throws SQLException {
+        validar(domicilio);
+        domicilioDao.guardar(domicilio);
     }
+
+    private void validar(Domicilio domicilio) {
+    }
+
+    @Override
+    public void actualizar(Domicilio domicilio) throws SQLException {
+        validar(domicilio);
+        domicilioDao.actualizar(domicilio);
+    }
+
+    @Override
+    public void eliminar(long id) throws SQLException {
+        domicilioDao.eliminar(id);
+    }
+
+    @Override
+    public Domicilio buscarPorId(long id) throws SQLException {
+        return domicilioDao.buscarPorId(id);
+    }
+
+    @Override
+    public List<Domicilio> buscarTodos() throws SQLException {
+        return domicilioDao.buscarTodos();
+    }
+
 }
